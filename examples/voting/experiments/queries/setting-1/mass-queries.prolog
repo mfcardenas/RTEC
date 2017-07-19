@@ -5,8 +5,8 @@
 % IMPORTANT: choose the appropriate number of static information 
 % including agents and INITIAL ROLE ASSIGNMENT and stream:
 :- ['../../data/static_information.prolog'].
-%:- ['../../data/stream.prolog'].
-:- ['data-generator.prolog'].
+:- ['../../data/stream.prolog'].
+%:- ['data-generator.prolog'].
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % performFullER(WM+'.txt', WM, 1000, 49000).

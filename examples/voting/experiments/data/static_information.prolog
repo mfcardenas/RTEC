@@ -1,6 +1,6 @@
 
 
-:- ['agent1000.prolog'].
+%:- ['agent1000.prolog'].
 %:- ['agent2000.prolog'].
 %:- ['agent3000.prolog'].
 %:- ['agent4000.prolog'].
@@ -11,12 +11,12 @@
 %:- ['agent9000.prolog'].
 %:- ['agent10000.prolog'].
 
-%agent(1).
-%agent(2).
-%agent(3).
-%agent(4).
-%agent(5).
-%agent(6).
+agent(1).
+agent(2).
+agent(3).
+agent(4).
+agent(5).
+agent(6).
 
 role(chair).
 role(voter).
@@ -26,10 +26,10 @@ initiatedAt(role_of(Ag,voter)=true, T1, -1, T2) :- T1=<(-1), -1<T2.
 
 motion(1).
 motion(2).
-motion(3).
-motion(4).
-motion(5).
-motion(6).
-motion(7).
-motion(8).
+%motion(3).
+%motion(4).
+%motion(5).
+%motion(6).
+%motion(7).
+%motion(8).
 
