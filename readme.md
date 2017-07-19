@@ -22,7 +22,7 @@ and then type in YAP
 **YAP> performFullER('sometextfile', 10, 10, 20).**
 
 
-**YAP> holdsFor(F,I).**
+**YAP> holdsFor(F,I), not I=[].**
 
 
 The assimilated narative is 
