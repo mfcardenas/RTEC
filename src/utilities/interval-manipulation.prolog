@@ -118,21 +118,16 @@ leq(X,Y) :- \+(X=inf), X=<Y.
 % the temporal distance between two time-points
 
 nextTimePoint(inf, inf) :- !.
-
 nextTimePoint(T, NextT) :-
 	temporalDistance(TD),
 	NextT is T+TD-(T mod TD). 
 
-% if the first argument of prevTimePoint is a 'legal' time-point (see test below)
-% then the first argument is produced as output (second argument)
-
 prevTimePoint(inf, inf) :- !.
-
-prevTimePoint(T, T) :-
+prevTimePoint(T, PrevT) :-
 	temporalDistance(TD),
 	% test if T is a 'legal' time-point
-	Temp is T mod TD, Temp=0, !. 
-
+	Temp is T mod TD, Temp=0, !,
+	PrevT is T-TD. 
 prevTimePoint(T, PrevT) :-
 	temporalDistance(TD),
 	PrevT is T-(T mod TD).

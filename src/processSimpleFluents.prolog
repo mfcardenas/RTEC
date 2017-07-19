@@ -9,6 +9,8 @@ processSimpleFluent(Index, F=V, InitTime, QueryTime) :-
 	% before or on Qi-WM and ending after Qi-WM   
 	% to the starting points computed at this stage  
 	addPoint(StPoint, InitList, CompleteInitList),
+	% store the starting points of fluents that expire
+	storeStartingPoints(Index, F=V, CompleteInitList),
 	% compute new intervals
 	holdsForSimpleFluent(F=V, NewIntervals, InitTime, QueryTime, CompleteInitList),
 	% update simpleFPList
@@ -24,9 +26,6 @@ isThereASimpleFPList(Index, F=V, ExtendedPList) :-
 % this predicate deals with the case where no intervals for F=V were computed at the previous query time
 isThereASimpleFPList(_Index, _U, []).
 
-
-addPoint([], L, L) :- !.
-addPoint([P], L, [P|L]).
 
 
 /************************************************************************************************************* 
@@ -109,17 +108,44 @@ termPoint(F=V, InitTime, EndTime, NextTs) :-
 	nextTimePoint(Ts, NextTs).
 
 
-% BROKEN
+% 'Classic' Event Calculus
 
 broken(U, Ts, Tf, T) :-
 	terminatedAt(U, Ts, Tf, T).
 
 broken(F=V1, Ts, Tstar, T) :-
-	initiatedAt(F=V2, Ts, Tstar, T), 
-	(strong_initiates ; V1 \= V2).   
+	simpleFluent(F=V2), \+V2=V1,
+	initiatedAt(F=V2, Ts, Tstar, T). 
+	%(strong_initiates ; V1 \= V2).   
   
 % strong_initiates.
 strong_initiates :- fail.    %% weak initiates 
+
+
+/****** auxiliary predicate ******/
+
+addPoint([], L, L) :- !.
+addPoint([P], L, [P|L]).
+
+/****** store the starting points of maxDurationUE fluents ******/
+
+storeStartingPoints(_, _, []) :- !.
+storeStartingPoints(Index, F=V, SPoints) :-
+	maxDurationUE(F=V, _, _),
+	retract(startingPoints(Index, F=V, _)), !,
+	assert(startingPoints(Index, F=V, SPoints)).
+storeStartingPoints(Index, F=V, SPoints) :-
+	maxDurationUE(F=V, _, _), !,
+	assert(startingPoints(Index, F=V, SPoints)).
+storeStartingPoints(Index, F=V, SPoints) :-
+	cyclic(F=V),
+	retract(startingPoints(Index, F=V, _)), !,
+	assert(startingPoints(Index, F=V, SPoints)).
+storeStartingPoints(Index, F=V, SPoints) :-
+	cyclic(F=V), !,
+	assert(startingPoints(Index, F=V, SPoints)).
+storeStartingPoints(_, _, _).
+
 
 
 /****** compute new intervals given the computed starting and ending points ******/
