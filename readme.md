@@ -5,7 +5,7 @@ This an experimental, not properly tested extension of RTEC that supports cycles
 
 # Applications
 
-###Voting for Multi-Agent Systems
+### Voting for Multi-Agent Systems
 
 In /examples there is a formalisation of a voting protocol for multi-agent systems that includes cycles and deadlines. To test it, navigate to
 
@@ -34,7 +34,7 @@ while the constants used for grounding are
 
 **/examples/voting/experiments/data/static_information.prolog**
 
-###Business Processes
+### Business Processes
 
 In /examples there is also a toy formalisation of business processes. To test it, navigate to
 
