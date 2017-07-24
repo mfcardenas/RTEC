@@ -1,7 +1,7 @@
 
-:- ['../../RTEC.prolog'].
+:- ['../../src/RTEC.prolog'].
 :- ['vopr_RTEC_declarations.prolog'].
-:- ['../../timeoutTreatment.prolog'].
+:- ['../../src/timeoutTreatment.prolog'].
 
 maxDuration(auxPerCloseBallot(M)=true, auxPerCloseBallot(M)=false, 8) :- motion(M).
 maxDuration(status(M)=proposed, status(M)=null, 10) :- motion(M).
